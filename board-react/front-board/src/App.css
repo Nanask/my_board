@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.main_buttons {
+  display: inline-block;
+  margin: 20px;
+}
+
+.static_button {
+  outline: none;
+  width: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  background-color: skyblue;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.main_table {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.main_table thead td {
+  color: white;
+  background-color: skyblue;
+  padding: 1rem;
+}
+
+.main_table td {
+  width: 20vh;
+  padding: 5px;
+}
+
+.main_table td {
+  border: 1px solid lightgray;
+}
