@@ -48,3 +48,51 @@
 .main_table td {
   border: 1px solid lightgray;
 }
+
+.black_modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+
+.white_modal {
+  width: 100%;
+  background: white;
+  padding: 200px;
+}
+
+.btn_close {
+  padding: 10px;
+  color: white;
+  background-color: skyblue;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin: 10px;
+  width: 20%;
+}
+
+.modal_write {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_write label,
+.modal_write input {
+  width: 100%;
+}
+
+.modal_write input {
+  flex: 2;
+  width: 60%;
+  margin: 10px;
+}
+
+.modal_write label {
+  flex: 1;
+  display: block;
+  width: 30%;
+}

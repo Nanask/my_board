@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useBoardContext } from "../context/BoardContext";
 import Buttons from "./Buttons";
 import MainList from "./MainList";
 
 const Main = () => {
+  const { switchModal, deleteBoard } = useBoardContext();
+
   return (
     <table className="main_table">
       <thead>
@@ -15,7 +18,7 @@ const Main = () => {
         </tr>
       </thead>
       <MainList />
-      <Buttons />
+      <Buttons onClick1={switchModal} onClick2={deleteBoard} string1={"작성하기"} string2={"삭제하기"} />
     </table>
   );
 };

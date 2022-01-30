@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useBoardContext } from "../context/BoardContext";
 
 const MainList = () => {
-  const [board, setBoard] = useState({
-    b_seq: "",
-    b_title: "",
-    b_name: "",
-    b_date: "",
-    b_content: "",
-  });
+  const { getBoard, boardList, writeBoard, isModal, checkedInputs, onChangeHandler } = useBoardContext();
 
-  const [boardList, setBoardList] = useState([
-    {
-      b_seq: "",
-      b_title: "저는 제목 ㅋ",
-      b_name: "저는 이름 ㅋ",
-      b_date: "2022-01-30",
-      b_content: "저는 내용~ ㅋ",
-    },
-  ]);
-
-  const getBoard = async () => {
-    const res = await fetch("http://localhost:8080");
-    const result = await res.json();
-    setBoardList(result);
-  };
-
-  useEffect(getBoard, []);
+  // 한번만 실행
+  useEffect(getBoard, [isModal]);
 
   const trList = boardList.map((sample) => {
     return (
       <tr>
         <td>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            id={sample.b_seq}
+            onChange={(e) => {
+              onChangeHandler(e.target.checked, e.target.id);
+            }}
+            checked={checkedInputs.includes(`${sample.b_seq}`) ? true : false}
+          />
         </td>
         <td>{sample.b_title}</td>
         <td>{sample.b_name}</td>
