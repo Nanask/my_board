@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useBoardContext } from "../context/BoardContext";
 
 const MainList = () => {
-  const { getBoard, boardList, writeBoard, isModal, checkedInputs, onChangeHandler } = useBoardContext();
+  const { getBoard, boardList, writeBoard, isModal, checkedInputs, onChangeHandler, switchModal } = useBoardContext();
 
   // 한번만 실행
   useEffect(getBoard, [isModal]);
 
   const trList = boardList.map((sample) => {
     return (
-      <tr>
+      <tr onClick={switchModal}>
         <td>
           <input
             type="checkbox"

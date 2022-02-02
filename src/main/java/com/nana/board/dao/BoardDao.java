@@ -9,6 +9,8 @@ import java.util.List;
 public interface BoardDao {
 
     public List<BoardVO> selectAll();
+    public BoardVO findById(Long b_seq);
     public int insert(BoardVO boardVO);
     public int delete(Long seq);
+    public int update(BoardVO boardVO);
 }

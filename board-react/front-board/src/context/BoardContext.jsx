@@ -58,6 +58,12 @@ const BoardContext = ({ children }) => {
     // getBoard();
   });
 
+  const updateBoard = async () => {
+    const res = await fetch("http://localhost:8080/update");
+    const result = await res.json();
+    console.log(result);
+  };
+
   const deleteBoard = async () => {
     const res = await fetch("http://localhost:8080/delete", {
       method: "POST",
@@ -91,7 +97,7 @@ const BoardContext = ({ children }) => {
     isModal ? setIsModal(false) : setIsModal(true);
   };
 
-  const props = { boardList, setBoardList, getBoard, isModal, setIsModal, switchModal, onChange, writeBoard, setCheckedInputs, checkedInputs, onChangeHandler, deleteBoard };
+  const props = { board, boardList, setBoardList, getBoard, isModal, setIsModal, switchModal, onChange, writeBoard, setCheckedInputs, checkedInputs, onChangeHandler, deleteBoard };
 
   return <appContext.Provider value={props}>{children}</appContext.Provider>;
 };

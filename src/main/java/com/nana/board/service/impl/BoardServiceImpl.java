@@ -18,7 +18,10 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardVO findById(Long seq) {
-        return null;
+        BoardVO boardVO = boardDao.findById(seq);
+
+        System.out.println("findById" + seq);
+        return boardVO;
     }
 
     @Override
@@ -41,6 +44,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int update(BoardVO boardVO) {
+        int result = boardDao.update(boardVO);
+        System.out.println("update result" + result);
         return 0;
     }
 

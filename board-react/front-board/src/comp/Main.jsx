@@ -10,7 +10,7 @@ const Main = () => {
     <table className="main_table">
       <thead>
         <tr>
-          <td></td>
+          <td>checkbox</td>
           <td>제목</td>
           <td>이름</td>
           <td>작성일자</td>

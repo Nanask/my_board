@@ -59,5 +59,15 @@ public class HomeController {
         }
         return "FAIL";
     }
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(Long b_seq){
+        bService.findById(b_seq);
+        return "seq";
+    }
+
+    @RequestMapping(value = "/update", method=RequestMethod.POST)
+    public String update(BoardVO boardVO){
+        return "update";
+    }
 
 }
