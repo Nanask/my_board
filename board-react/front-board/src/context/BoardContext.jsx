@@ -36,7 +36,7 @@ const BoardContext = ({ children }) => {
   const getBoard = useCallback(async () => {
     const res = await fetch("http://localhost:8080");
     const result = await res.json();
-    console.log(result);
+    // console.log(result);
     setBoardList(result);
   });
 
@@ -58,10 +58,20 @@ const BoardContext = ({ children }) => {
     // getBoard();
   });
 
-  const updateBoard = async () => {
-    const res = await fetch("http://localhost:8080/update");
-    const result = await res.json();
-    console.log(result);
+  const modalOnClick = (e) => {
+    switchModal();
+  };
+
+  const getUpdateBoard = async (e) => {
+    const b_seq = e.target.closest("TR").dataset.id;
+    switchModal();
+    console.log("b_seq", b_seq);
+    const res = await fetch(`http://localhost:8080/update/${b_seq}`);
+    // const result = await res.json();
+    const result = await res.text();
+    console.log("result 있으면", result);
+    setBoard({ ...board, b_title: result.b_title, b_name: result.b_name, b_date: result.b_date, b_content: result.b_content });
+    console.log("setBoard", board);
   };
 
   const deleteBoard = async () => {
@@ -97,7 +107,23 @@ const BoardContext = ({ children }) => {
     isModal ? setIsModal(false) : setIsModal(true);
   };
 
-  const props = { board, boardList, setBoardList, getBoard, isModal, setIsModal, switchModal, onChange, writeBoard, setCheckedInputs, checkedInputs, onChangeHandler, deleteBoard };
+  const props = {
+    board,
+    boardList,
+    setBoardList,
+    getBoard,
+    isModal,
+    setIsModal,
+    switchModal,
+    onChange,
+    writeBoard,
+    setCheckedInputs,
+    checkedInputs,
+    onChangeHandler,
+    deleteBoard,
+    modalOnClick,
+    getUpdateBoard,
+  };
 
   return <appContext.Provider value={props}>{children}</appContext.Provider>;
 };

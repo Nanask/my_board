@@ -59,12 +59,32 @@ public class HomeController {
         }
         return "FAIL";
     }
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String update(Long b_seq){
-        bService.findById(b_seq);
-        return "seq";
+
+    @ResponseBody
+    @RequestMapping(value = "/update/{b_seq}", method = RequestMethod.GET)
+    public String update( @PathVariable("b_seq") Long b_seq, BoardVO boardVO){
+
+        if(b_seq != null) {
+            System.out.println("b_seq" + b_seq);
+            boardVO = bService.findById(b_seq);
+//            ObjectMapper objMapper = new ObjectMapper();
+//            String jsonString = null;
+//            try {
+//                jsonString = objMapper.writeValueAsString(boardVO);
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//                System.out.println("Json 오류");
+//            }
+//
+//            return jsonString;
+//            boardVO = bService.findById(boardVO.getB_seq());
+//            System.out.println("boardVO, controller" + boardVO);
+            return boardVO.toString();
+        }
+        return "FAIL";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/update", method=RequestMethod.POST)
     public String update(BoardVO boardVO){
         return "update";

@@ -9,6 +9,7 @@ const Write = () => {
   // 2. fetch로 시퀀스에 맞는 데이터 가져오기
   // 3. 가져온 데이터 board에 셋팅
   // 4. 클릭했을 때 모달창 나오기
+  // const getSeq = board.map((board) => {
   return (
     <div className="modal_write">
       <label>제목</label>
@@ -22,6 +23,8 @@ const Write = () => {
       <Buttons string1={"작성하기"} string2={"닫기"} onClick1={writeBoard} onClick2={switchModal} />
     </div>
   );
+  // });
+  // return <div>{getSeq}</div>;
 };
 
 export default Write;

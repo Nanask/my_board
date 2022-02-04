@@ -5,6 +5,10 @@
         SELECT *
         FROM tbl_board;
     </select>
+    <select id="findById" resultType="BoardVO">
+        SELECT *
+        FROM tbl_board WHERE b_seq = #{b_seq}
+    </select>
     <insert id="insert" parameterType="BoardVO">
         INSERT INTO tbl_board(b_title, b_name, b_date, b_content)
         VALUE (#{b_title},#{b_name},#{b_date},#{b_content})
