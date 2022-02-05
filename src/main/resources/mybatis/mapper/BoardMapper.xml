@@ -17,6 +17,6 @@
         DELETE FROM tbl_board WHERE b_seq = #{b_seq}
     </delete>
     <update id="update" parameterType="BoardVO">
-        UPDATE tbl_board SET b_seq = #{b_seq}
+        UPDATE tbl_board SET b_title = #{b_title}, b_name = #{b_name},b_date = #{b_date},b_content = #{b_content} WHERE b_seq = #{b_seq}
     </update>
 </mapper>

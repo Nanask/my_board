@@ -20,7 +20,9 @@ const Write = () => {
       <input type="date" name="b_date" onChange={onChange} value={board.b_date} />
       <label>내용</label>
       <textarea name="b_content" onChange={onChange} value={board.b_content}></textarea>
+      <div></div>
       <Buttons onClick1={writeBoard} onClick2={switchModal} string1={"작성하기"} string2={"닫기"} />
+      <button onClick={postUpdateBoard}>수정하기</button>
     </div>
   );
   // });

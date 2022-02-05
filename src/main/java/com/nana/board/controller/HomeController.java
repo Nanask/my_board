@@ -85,9 +85,10 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update", method=RequestMethod.POST)
-    public String update(@RequestBody BoardVO boardVO){
+    @RequestMapping(value = "/update/{b_seq}", method=RequestMethod.POST)
+    public String update(@RequestBody BoardVO boardVO, @PathVariable("b_seq") Long b_seq){
 
+        System.out.println("update" + boardVO);
         if(boardVO != null) {
             System.out.println("update" + boardVO);
             int result = bService.update(boardVO);

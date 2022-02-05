@@ -6,7 +6,13 @@ export const useBoardContext = () => {
 };
 
 const BoardContext = ({ children }) => {
-  const [board, setBoard] = useState({});
+  const [board, setBoard] = useState({
+    b_seq: "",
+    b_title: "",
+    b_name: "",
+    b_date: "",
+    b_content: "",
+  });
 
   const [boardList, setBoardList] = useState([
     {
@@ -20,6 +26,7 @@ const BoardContext = ({ children }) => {
 
   const onChange = (e) => {
     const { value, name } = e.target;
+    console.log("name", value);
     setBoard({ ...board, [name]: value });
   };
 
@@ -50,7 +57,7 @@ const BoardContext = ({ children }) => {
     // const result = res.json;
     setIsModal(!isModal);
     console.log("result", result);
-    // setBoard({ b_title: "", b_name: "", b_date: "", b_content: "" });
+    setBoard({ b_title: "", b_name: "", b_date: "", b_content: "" });
     // getBoard();
   });
 
@@ -86,23 +93,22 @@ const BoardContext = ({ children }) => {
   // ;
 
   const postUpdateBoard = async () => {
+    const { b_title, b_seq, b_name, b_date, b_content } = board;
     // const b_seq = e.target.closest("TR").dataset.id;
-    onChange();
-    const res = await fetch("http://localhost:8080/update", {
+    console.log("b_title, b_seq, b_name,b_date,b_content", b_title, b_seq, b_name, b_date, b_content);
+    const res = await fetch(`http://localhost:8080/update/${b_seq}`, {
       method: "POST",
-      body: JSON.stringify(checkedInputs),
+      body: JSON.stringify(board),
       headers: {
         "Content-Type": "application/json",
       },
     });
     console.log(res);
     const result = res.text();
-    // if (result) {
-    //   alert("삭제합니다.");
-    // }
     console.log("result", result);
     setBoard({ ...board, result });
-    getBoard();
+    setIsModal(!isModal);
+    // getBoard();
   };
 
   const deleteBoard = async () => {
