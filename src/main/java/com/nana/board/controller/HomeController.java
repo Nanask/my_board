@@ -67,27 +67,37 @@ public class HomeController {
         if(b_seq != null) {
             System.out.println("b_seq" + b_seq);
             boardVO = bService.findById(b_seq);
-//            ObjectMapper objMapper = new ObjectMapper();
-//            String jsonString = null;
-//            try {
-//                jsonString = objMapper.writeValueAsString(boardVO);
-//            } catch (JsonProcessingException e) {
-//                e.printStackTrace();
-//                System.out.println("Json 오류");
-//            }
-//
-//            return jsonString;
+            ObjectMapper objMapper = new ObjectMapper();
+            String jsonString = null;
+            try {
+                jsonString = objMapper.writeValueAsString(boardVO);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                System.out.println("Json 오류");
+            }
+
+            return jsonString;
 //            boardVO = bService.findById(boardVO.getB_seq());
 //            System.out.println("boardVO, controller" + boardVO);
-            return boardVO.toString();
+//            return boardVO.toString();
         }
         return "FAIL";
     }
 
     @ResponseBody
     @RequestMapping(value = "/update", method=RequestMethod.POST)
-    public String update(BoardVO boardVO){
-        return "update";
+    public String update(@RequestBody BoardVO boardVO){
+
+        if(boardVO != null) {
+            System.out.println("update" + boardVO);
+            int result = bService.update(boardVO);
+            if(result != 1) {
+                System.out.println("sql 오류");
+            }
+            return "OK";
+        }
+
+        return "Fail";
     }
 
 }

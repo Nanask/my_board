@@ -45,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
     public int update(BoardVO boardVO) {
         int result = boardDao.update(boardVO);
         System.out.println("update result" + result);
-        return 0;
+        return result;
     }
 
     @Override

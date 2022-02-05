@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useBoardContext } from "../context/BoardContext";
 
 const MainList = () => {
-  const { getBoard, boardList, writeBoard, isModal, checkedInputs, onChangeHandler, modalOnClick, getUpdateBoard } = useBoardContext();
+  const { getBoard, boardList, isModal, checkedInputs, onChangeHandler, getUpdateBoard } = useBoardContext();
 
   // 한번만 실행
   useEffect(getBoard, [isModal]);

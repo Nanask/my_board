@@ -6,12 +6,7 @@ export const useBoardContext = () => {
 };
 
 const BoardContext = ({ children }) => {
-  const [board, setBoard] = useState({
-    b_title: "",
-    b_name: "",
-    b_date: "",
-    b_content: "",
-  });
+  const [board, setBoard] = useState({});
 
   const [boardList, setBoardList] = useState([
     {
@@ -55,6 +50,7 @@ const BoardContext = ({ children }) => {
     // const result = res.json;
     setIsModal(!isModal);
     console.log("result", result);
+    // setBoard({ b_title: "", b_name: "", b_date: "", b_content: "" });
     // getBoard();
   });
 
@@ -64,14 +60,49 @@ const BoardContext = ({ children }) => {
 
   const getUpdateBoard = async (e) => {
     const b_seq = e.target.closest("TR").dataset.id;
-    switchModal();
+    modalOnClick();
     console.log("b_seq", b_seq);
     const res = await fetch(`http://localhost:8080/update/${b_seq}`);
     // const result = await res.json();
-    const result = await res.text();
-    console.log("result 있으면", result);
-    setBoard({ ...board, b_title: result.b_title, b_name: result.b_name, b_date: result.b_date, b_content: result.b_content });
+    const getResult = await res.json();
+    console.log("result 있으면", getResult);
+    // setBoard({ ...board, b_title: result.b_title, b_name: result.b_name, b_date: result.b_date, b_content: result.b_content });
+    // setBoard({ result });
+    // if (b_seq == result.b_seq) {
+    // console.log("result.b_seq", getResult.b_seq);
+    // const getBoardList = getResult.filter((result) => {
+    // if (b_seq == result.b_seq) {
+    // console.log("boardList", result.b_seq);
+
+    // 값은 나오는데 board에 찍히지 않아서 then으로 순서를 만져보려다 안됨;
+    // const res = fetch(`http://localhost:8080/update/${b_seq}`)
+    // .then((res) => res.json())
+    // .then((result) => setBoard(result), console.log("board", board));
+    setBoard(getResult);
+    //   }
+    // });
     console.log("setBoard", board);
+  };
+  // ;
+
+  const postUpdateBoard = async () => {
+    // const b_seq = e.target.closest("TR").dataset.id;
+    onChange();
+    const res = await fetch("http://localhost:8080/update", {
+      method: "POST",
+      body: JSON.stringify(checkedInputs),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res);
+    const result = res.text();
+    // if (result) {
+    //   alert("삭제합니다.");
+    // }
+    console.log("result", result);
+    setBoard({ ...board, result });
+    getBoard();
   };
 
   const deleteBoard = async () => {
@@ -123,6 +154,7 @@ const BoardContext = ({ children }) => {
     deleteBoard,
     modalOnClick,
     getUpdateBoard,
+    postUpdateBoard,
   };
 
   return <appContext.Provider value={props}>{children}</appContext.Provider>;

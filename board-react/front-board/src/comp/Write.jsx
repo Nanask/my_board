@@ -3,7 +3,7 @@ import { useBoardContext } from "../context/BoardContext";
 import Buttons from "./Buttons";
 
 const Write = () => {
-  const { switchModal, onChange, writeBoard, board } = useBoardContext();
+  const { switchModal, onChange, writeBoard, board, postUpdateBoard } = useBoardContext();
 
   // 1. input value 바인딩
   // 2. fetch로 시퀀스에 맞는 데이터 가져오기
@@ -20,7 +20,7 @@ const Write = () => {
       <input type="date" name="b_date" onChange={onChange} value={board.b_date} />
       <label>내용</label>
       <textarea name="b_content" onChange={onChange} value={board.b_content}></textarea>
-      <Buttons string1={"작성하기"} string2={"닫기"} onClick1={writeBoard} onClick2={switchModal} />
+      <Buttons onClick1={writeBoard} onClick2={switchModal} string1={"작성하기"} string2={"닫기"} />
     </div>
   );
   // });
