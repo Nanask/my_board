@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 const appContext = createContext();
 export const useBoardContext = () => {
@@ -57,17 +57,22 @@ const BoardContext = ({ children }) => {
     // const result = res.json;
     setIsModal(!isModal);
     console.log("result", result);
-    setBoard({ b_title: "", b_name: "", b_date: "", b_content: "" });
     // getBoard();
+    resetBoard();
   });
+
+  const resetBoard = () => {
+    setBoard({ b_title: "", b_name: "", b_date: "", b_content: "" });
+  };
 
   const modalOnClick = (e) => {
     switchModal();
+    resetBoard();
   };
 
   const getUpdateBoard = async (e) => {
     const b_seq = e.target.closest("TR").dataset.id;
-    modalOnClick();
+    switchModal();
     console.log("b_seq", b_seq);
     const res = await fetch(`http://localhost:8080/update/${b_seq}`);
     // const result = await res.json();
@@ -88,14 +93,20 @@ const BoardContext = ({ children }) => {
     setBoard(getResult);
     //   }
     // });
-    console.log("setBoard", board);
   };
   // ;
 
   const postUpdateBoard = async () => {
     const { b_title, b_seq, b_name, b_date, b_content } = board;
     // const b_seq = e.target.closest("TR").dataset.id;
-    console.log("b_title, b_seq, b_name,b_date,b_content", b_title, b_seq, b_name, b_date, b_content);
+    console.log(
+      "b_title, b_seq, b_name,b_date,b_content",
+      b_title,
+      b_seq,
+      b_name,
+      b_date,
+      b_content
+    );
     const res = await fetch(`http://localhost:8080/update/${b_seq}`, {
       method: "POST",
       body: JSON.stringify(board),

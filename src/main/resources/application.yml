@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/board"
-    username: "A_Re"
-    password: "12345"
+    username: "root"
+    password: "dudzpsdb1!"
 
 mybatis:
   config: "mybatis-config.xml"
